@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component, useState, useEffect} from 'react';
 import './App.css';
+import List from './List.jsx';
 
-function App() {
+const App=() =>{
+  const [todos, setTodo] = useState(['공부합시다.']);
+  const [newTodo, setNewTodo] = useState();
+  const changeInputData = (e) => {
+    setNewTodo(e.target.value);
+  }
+
+  const addTodo = (e) => {
+    e.preventDefault();
+    setTodo([...todos, newTodo]);
+
+  }
+
+  useEffect( () => {
+    console.log ("잘되는지 봅시다 ", todos);
+  },[todos])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    <h1>Kod React</h1>
+    
+    <form action="">
+      <input type="text" name="" onChange={changeInputData}/>
+      <button onClick={addTodo}>할일추가</button>
+    </form>
+
+    <List todos={todos}/>
+    </>
+  )
 }
 
 export default App;
